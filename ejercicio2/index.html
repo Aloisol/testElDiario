@@ -1,0 +1,59 @@
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	</head>
+
+	<body>
+
+		<main>
+			<div id="contenedorPrincipal">
+				<h1>--------------- EJERCICIO 2 ---------------</h1>
+				<h2>Objeto inicial: { prop1: "A", prop2: "B", prop3: "C"}</h2>
+				<h2>Propiedad a eliminar: prop1</h2>
+				<h2>Respuesta uno: <span id='resp'></span></h2>
+				<h2>Objeto final uno: <span id='resp2'></span></h2>
+				
+				<h2>Respuesta dos: <span id='resp3'></span></h2>
+				<h2>Objeto final dos: <span id='resp4'></span></h2>
+		
+			</div>
+		<main>
+	</body>
+	
+			<script>
+		
+			function removeProperty(obj, prop){
+				if(obj.hasOwnProperty(prop)){
+					delete obj[prop];
+					return true;
+				}else{return false;}
+			}
+		
+			console.log("--------------- EJERCICIO 2 ---------------");
+			var objPruebas = { prop1: "A", prop2: "B", prop3: "C"};
+			
+			console.log("Objeto inicial:");
+			console.log(objPruebas);
+			console.log("Propiedad a elminar: prop1");
+			
+			respuestaUno = removeProperty(objPruebas, "prop1");
+			respuestaDos = removeProperty(objPruebas, "prop1");
+			
+			console.log("Primera respuesta: "+respuestaUno);
+			console.log("Objeto final:");
+			console.log(objPruebas); 
+			
+			console.log("Segunda respuesta: "+respuestaDos);
+			console.log("Objeto final:");
+			console.log(objPruebas); 
+			
+			document.getElementById('resp').innerHTML = respuestaUno;
+			document.getElementById('resp2').innerHTML = JSON.stringify(objPruebas);
+			
+			document.getElementById('resp3').innerHTML = respuestaDos;
+			document.getElementById('resp4').innerHTML = JSON.stringify(objPruebas);
+			
+		</script>
+</html>

@@ -1,0 +1,59 @@
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	</head>
+
+	<body>
+
+		<main>
+			<div class="contenedorPrincipal">
+			
+				<h1>--------------- EJERCICIO 3 ---------------</h1>
+				<h2>Introduce una fecha: <input type="text" placeholder="MM/DD/AAAA" id="fecha">  <button onclick="formatDate()">Envia fecha</button>
+				<h2>Respuesta: <span id='resp'></span></h2>
+			
+			</div>
+		<main>
+	</body>
+	
+	<script>
+	
+	
+		function verificaFecha (d, m ,y) {
+			return m > 0 && m < 13 && y > 0 && y < 32768 && d > 0 && d <= (new Date(y, m, 0)).getDate();
+		}
+	
+		function formatDate(){
+			console.log("--------------- EJERCICIO 3 ---------------");
+			var userDate = document.getElementById("fecha").value;
+			console.log("Fecha introducida: "+userDate);
+			var d = userDate.split('/');
+			
+			if(verificaFecha(parseInt(d[1]), parseInt(d[0]), parseInt(d[2]))){
+				
+				var fecha = new Date(parseInt(d[2]), parseInt(d[0])-1, parseInt(d[1]));
+
+				dia = fecha.getDate();
+				mes = fecha.getMonth()+1;
+				
+				dia = dia.toString();
+				mes = mes.toString();
+				
+				if(dia.length < 2){dia = "0"+dia;}
+				if(mes.length < 2){mes = "0"+mes;}
+				
+				console.log("Respuesta: "+fecha.getFullYear()+""+mes+""+dia);
+				document.getElementById('resp').innerHTML = fecha.getFullYear()+""+mes+""+dia;
+				
+			}
+			else{
+				console.log("Respuesta: La fecha introducida no existe");
+				document.getElementById('resp').innerHTML = "La fecha introducida no existe";
+			}
+		}
+		
+		
+	</script>
+</html>

@@ -1,0 +1,71 @@
+
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	</head>
+
+	<body>
+
+		<main>
+			<div class="contenedorPrincipal">
+			
+				<h1>--------------- EJERCICIO 6 ---------------</h1>
+				<h2>Introduce ruta: <input type="text" id="ruta">  <button onclick="acceso()">Envia ruta</button>
+				<h2>Objeto: { p1:{ p2:"dato" } }</h2>
+				<h2>Respuesta por defecto: default</h2>
+				<h2>Resultado: <span id='resp'></span></h2>
+			
+			</div>
+		<main>
+	</body>
+	
+		<script>
+
+	
+		function accesoSeguro(obj, valor, ruta = ""){
+			if(ruta == ""){
+				return accesoSeguro(obj, valor, prompt("Introduce ruta"));
+			}else{
+				
+				if(ruta.indexOf('.') != -1){					
+					ruta = ruta.split('.');
+
+					if(typeof obj !== 'undefined'){
+						resultado = obj[ruta[0]];
+						for(i=1;i<ruta.length;i++){
+							if(typeof resultado !== 'undefined'){
+								resultado = resultado[ruta[i]];
+							}else{break;}
+						}
+						if(typeof resultado === 'undefined'){return valor;}
+						else{return resultado;}
+					}else{return valor;}
+				}else{
+					if(typeof obj[ruta] !== 'undefined'){return obj[ruta];}
+					else{return valor;}
+				}
+			}
+		}		
+
+
+		function acceso(){
+			console.log("--------------- EJERCICIO 6 ---------------");
+			var ruta = document.getElementById("ruta").value;
+			const Objeto = { p1:{ p2:"dato" } };
+			console.log("Objeto: "+JSON.stringify(Objeto));
+			console.log("Respuestas por defecto: default");
+			
+			respuesta = JSON.stringify(accesoSeguro(Objeto, "default", ruta));
+			document.getElementById('resp').innerHTML = respuesta;
+			console.log("Respuesta:");
+			console.log(respuesta);
+		}
+		
+		
+		
+		
+	</script>
+	
+</html>

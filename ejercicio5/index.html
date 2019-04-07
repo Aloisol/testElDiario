@@ -1,0 +1,71 @@
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	</head>
+
+	<body>
+
+		<main>
+			<div class="contenedorPrincipal">
+			
+				<h1>--------------- EJERCICIO 5 ---------------</h1>
+				<h2>Introduce una numero: <input type="number" id="numero">  <button onclick="ordenaNumero()">Con Sort</button> <button onclick="ordenaNumeroSinSort()">Con burbuja</button>
+				<h2>Resultado: <span id='resp'></span></h2>
+			
+			</div>
+		<main>
+	</body>
+	
+		<script>
+		
+			function ordenaNumero(){
+				console.log("--------------- EJERCICIO 5 ---------------");
+				var num = document.getElementById("numero").value;
+				console.log("Número insertado: "+num);
+				arr = [];
+				for(i=0;i<num.length;i++){
+					arr[i] = num[i];
+				}
+				arr.sort();
+				arr.reverse();
+				
+				num = arr.toString()
+				num = num.replace(/,/g, "");
+				document.getElementById('resp').innerHTML = num
+				console.log("Resultado: "+num);
+			}			
+			
+			
+			function ordenaNumeroSinSort(){
+				console.log("--------------- EJERCICIO 5 ---------------");
+				var num = document.getElementById("numero").value;
+				console.log("Número insertado: "+num);
+				arr = [];
+				for(i=0;i<num.length;i++){
+					arr[i] = num[i];
+				}
+				
+				
+				for (x = 0; x < arr.length; x++) {
+					for (i = 0; i < arr.length-x-1; i++) {
+						if(arr[i] < arr[i+1]){
+							tmp = arr[i+1];
+							arr[i+1] = arr[i];
+							arr[i] = tmp;
+						}
+					}
+				}
+			
+				num = arr.toString()
+				num = num.replace(/,/g, "");
+				document.getElementById('resp').innerHTML = num
+				console.log("Resultado: "+num);
+			}
+			
+
+			
+		</script>
+	
+</html>

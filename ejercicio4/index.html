@@ -1,0 +1,509 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script language="JavaScript" type="text/javascript" src="js/raphael-min.js"></script>
+<script language="JavaScript" type="text/javascript" src="js/jquery.js"></script>
+<script language="JavaScript" type="text/javascript" src="js/ccaa.js"></script>
+
+
+<style>
+
+
+*{
+	margin:0px;
+	padding:0px;
+}
+
+#contenedor{	
+	width: 1200px;
+	height: 515px;
+	float: left;
+	position: absolute;
+}
+
+#mapaCCAA{
+	width: 700px;
+	height: 515px;
+	float: left;
+	position: absolute;
+	z-index: 50;
+}
+
+unica{
+	width: 700px;
+	height: 515px;
+	float: left;
+	z-index: 40;
+}
+
+.tooltip{
+	padding:5px;
+	background-color: silver;
+	color:black;
+	position:absolute;
+	top:0px;
+	left:0px;
+	z-index: 100;
+}
+
+
+</style>
+
+<script>
+
+function pintaTooltip(texto, x, y){
+
+	if(! $('#toolTip').length ){
+		tooltip = $("<span></span>").text(texto);
+		tooltip.addClass("tooltip");
+		tooltip.attr("id", "toolTip");
+		tooltip.css("top", y);
+		tooltip.css("left",x);
+		$("body").append(tooltip);
+	}
+	else{
+		if($('#toolTip').text() == texto){
+			$('#toolTip').css("top", y);
+			$('#toolTip').css("left", x);
+		}
+		else{
+			$('#toolTip').remove();
+		}
+	}
+}
+
+
+$(document).ready(function() {
+
+	var mapa = Raphael("mapaCCAA", 1700, 1515);
+
+	function pintaCCAA(){
+		
+		asturias = mapa.path(departamentosCCAA['asturias']).attr({
+			fill: '#0AB1FE',
+			stroke: "#56494D",
+		}).mousemove(function(e){
+			pintaTooltip("Asturias", e.pageX+10, e.pageY+20);
+		}).hover(function(){this.attr({"fill":"#000"});
+		}).mouseout(function(){
+			this.attr({"fill":"#0AB1FE"})
+			$('#toolTip').remove();
+		}).click(function(){
+			if(this["zoom"] == true){
+				this.scale(0.5,0.5,0,0);
+				mostrar()
+				this["zoom"] = false;
+			}else{
+				ocultar();
+				this.show();
+				this.scale(2,2,0,0);
+				this["zoom"] = true;
+			}			
+		});
+		
+		
+		cantabria = mapa.path(departamentosCCAA['cantabria']).attr({
+			fill: '#0AB1FE',
+			stroke: "#56494D",
+		}).mousemove(function(e){
+			pintaTooltip("Cantabria", e.pageX+10, e.pageY+20);
+		}).hover(function(){this.attr({"fill":"#000"});
+		}).mouseout(function(){
+			this.attr({"fill":"#0AB1FE"})
+			$('#toolTip').remove();
+		}).click(function(){
+			if(this["zoom"] == true){
+				this.scale(0.5,0.5,0,0);
+				mostrar()
+				this["zoom"] = false;
+			}else{
+				ocultar();
+				this.show();
+				this.scale(2,2,0,0);
+				this["zoom"] = true;
+			}			
+		});
+		
+		
+		galicia = mapa.path(departamentosCCAA['galicia']).attr({
+			fill: '#0AB1FE',
+			stroke: "#56494D",
+		}).mousemove(function(e){
+			pintaTooltip("Galicia", e.pageX+10, e.pageY+20);
+		}).hover(function(){this.attr({"fill":"#000"});
+		}).mouseout(function(){
+			this.attr({"fill":"#0AB1FE"})
+			$('#toolTip').remove();
+		}).click(function(){
+			if(this["zoom"] == true){
+				this.scale(0.5,0.5,0,0);
+				mostrar()
+				this["zoom"] = false;
+			}else{
+				ocultar();
+				this.show();
+				this.scale(2,2,0,0);
+				this["zoom"] = true;
+			}			
+		});
+		
+		
+		euskadi = mapa.path(departamentosCCAA['euskadi']).attr({
+			fill: '#0AB1FE',
+			stroke: "#56494D",
+		}).mousemove(function(e){
+			pintaTooltip("Pais Vasco", e.pageX+10, e.pageY+20);
+		}).hover(function(){this.attr({"fill":"#000"});
+		}).mouseout(function(){
+			this.attr({"fill":"#0AB1FE"})
+			$('#toolTip').remove();
+		}).click(function(){
+			if(this["zoom"] == true){
+				this.scale(0.5,0.5,0,0);
+				mostrar()
+				this["zoom"] = false;
+			}else{
+				ocultar();
+				this.show();
+				this.scale(2,2,0,0);
+				this["zoom"] = true;
+			}			
+		});
+		
+		
+		navarra = mapa.path(departamentosCCAA['navarra']).attr({
+			fill: '#0AB1FE',
+			stroke: "#56494D",
+		}).mousemove(function(e){
+			pintaTooltip("Navarra", e.pageX+10, e.pageY+20);
+		}).hover(function(){this.attr({"fill":"#000"});
+		}).mouseout(function(){
+			this.attr({"fill":"#0AB1FE"})
+			$('#toolTip').remove();
+		}).click(function(){
+			if(this["zoom"] == true){
+				this.scale(0.5,0.5,0,0);
+				mostrar()
+				this["zoom"] = false;
+			}else{
+				ocultar();
+				this.show();
+				this.scale(2,2,0,0);
+				this["zoom"] = true;
+			}			
+		});
+		
+		
+		rioja = mapa.path(departamentosCCAA['rioja']).attr({
+			fill: '#0AB1FE',
+			stroke: "#56494D",
+		}).mousemove(function(e){
+			pintaTooltip("La Rioja", e.pageX+10, e.pageY+20);
+		}).hover(function(){this.attr({"fill":"#000"});
+		}).mouseout(function(){
+			this.attr({"fill":"#0AB1FE"})
+			$('#toolTip').remove();
+		}).click(function(){
+			if(this["zoom"] == true){
+				this.scale(0.5,0.5,0,0);
+				mostrar()
+				this["zoom"] = false;
+			}else{
+				ocultar();
+				this.show();
+				this.scale(2,2,0,0);
+				this["zoom"] = true;
+			}			
+		});
+	
+		cataluña = mapa.path(departamentosCCAA['cataluña']).attr({
+			fill: '#0AB1FE',
+			stroke: "#56494D",
+		}).mousemove(function(e){
+			pintaTooltip("Cataluña", e.pageX+10, e.pageY+20);
+		}).hover(function(){this.attr({"fill":"#000"});
+		}).mouseout(function(){
+			this.attr({"fill":"#0AB1FE"})
+			$('#toolTip').remove();
+		}).click(function(){
+			if(this["zoom"] == true){
+				this.scale(0.5,0.5,0,0);
+				mostrar()
+				this["zoom"] = false;
+			}else{
+				ocultar();
+				this.show();
+				this.scale(2,2,0,0);
+				this["zoom"] = true;
+			}			
+		});
+		
+		
+		
+		castillaLeon = mapa.path(departamentosCCAA['castilla-leon']).attr({
+			fill: '#0AB1FE',
+			stroke: "#56494D",
+		}).mousemove(function(e){
+			pintaTooltip("Castilla y Leon", e.pageX+10, e.pageY+20);
+		}).hover(function(){this.attr({"fill":"#000"});
+		}).mouseout(function(){
+			this.attr({"fill":"#0AB1FE"})
+			$('#toolTip').remove();
+		}).click(function(){
+			if(this["zoom"] == true){
+				this.scale(0.5,0.5,0,0);
+				mostrar()
+				this["zoom"] = false;
+			}else{
+				ocultar();
+				this.show();
+				this.scale(2,2,0,0);
+				this["zoom"] = true;
+			}			
+		});
+
+
+		castillaMancha = mapa.path(departamentosCCAA['castilla-mancha']).attr({
+			fill: '#0AB1FE',
+			stroke: "#56494D",
+		}).mousemove(function(e){
+			pintaTooltip("Castilla La Mancha", e.pageX+10, e.pageY+20);
+		}).hover(function(){this.attr({"fill":"#000"});
+		}).mouseout(function(){
+			this.attr({"fill":"#0AB1FE"})
+			$('#toolTip').remove();
+		}).click(function(){
+			if(this["zoom"] == true){
+				this.scale(0.5,0.5,0,0);
+				mostrar()
+				this["zoom"] = false;
+			}else{
+				ocultar();
+				this.show();
+				this.scale(2,2,0,0);
+				this["zoom"] = true;
+			}			
+		});
+
+
+		madrid = mapa.path(departamentosCCAA['madrid']).attr({
+			fill: '#0AB1FE',
+			stroke: "#56494D",
+		}).mousemove(function(e){
+			pintaTooltip("Madrid", e.pageX+10, e.pageY+20);
+		}).hover(function(){this.attr({"fill":"#000"});
+		}).mouseout(function(){
+			this.attr({"fill":"#0AB1FE"})
+			$('#toolTip').remove();
+		}).click(function(){
+			if(this["zoom"] == true){
+				this.scale(0.5,0.5,0,0);
+				mostrar()
+				this["zoom"] = false;
+			}else{
+				ocultar();
+				this.show();
+				this.scale(2,2,0,0);
+				this["zoom"] = true;
+			}			
+		});
+
+		murcia = mapa.path(departamentosCCAA['murcia']).attr({
+			fill: '#0AB1FE',
+			stroke: "#56494D",
+		}).mousemove(function(e){
+			pintaTooltip("Murcia", e.pageX+10, e.pageY+20);
+		}).hover(function(){this.attr({"fill":"#000"});
+		}).mouseout(function(){
+			this.attr({"fill":"#0AB1FE"})
+			$('#toolTip').remove();
+		}).click(function(){
+			if(this["zoom"] == true){
+				this.scale(0.5,0.5,0,0);
+				mostrar()
+				this["zoom"] = false;
+			}else{
+				ocultar();
+				this.show();
+				this.scale(2,2,0,0);
+				this["zoom"] = true;
+			}			
+		});
+
+	
+		valencia = mapa.path(departamentosCCAA['com-valenciana']).attr({
+			fill: '#0AB1FE',
+			stroke: "#56494D",
+		}).mousemove(function(e){
+			pintaTooltip("Valencia", e.pageX+10, e.pageY+20);
+		}).hover(function(){this.attr({"fill":"#000"});
+		}).mouseout(function(){
+			this.attr({"fill":"#0AB1FE"})
+			$('#toolTip').remove();
+		}).click(function(){
+			if(this["zoom"] == true){
+				this.scale(0.5,0.5,0,0);
+				mostrar()
+				this["zoom"] = false;
+			}else{
+				ocultar();
+				this.show();
+				this.scale(2,2,0,0);
+				this["zoom"] = true;
+			}			
+		});
+
+
+		extremadura = mapa.path(departamentosCCAA['extremadura']).attr({
+			fill: '#0AB1FE',
+			stroke: "#56494D",
+		}).mousemove(function(e){
+			pintaTooltip("Extremadura", e.pageX+10, e.pageY+20);
+		}).hover(function(){this.attr({"fill":"#000"});
+		}).mouseout(function(){
+			this.attr({"fill":"#0AB1FE"})
+			$('#toolTip').remove();
+		}).click(function(){
+			if(this["zoom"] == true){
+				this.scale(0.5,0.5,0,0);
+				mostrar()
+				this["zoom"] = false;
+			}else{
+				ocultar();
+				this.show();
+				this.scale(2,2,0,0);
+				this["zoom"] = true;
+			}			
+		});
+
+
+		andalucia = mapa.path(departamentosCCAA['andalucia']).attr({
+			fill: '#0AB1FE',
+			stroke: "#56494D",
+		}).mousemove(function(e){
+			pintaTooltip("Andalucia", e.pageX+10, e.pageY+20);
+		}).hover(function(){this.attr({"fill":"#000"});
+		}).mouseout(function(){
+			this.attr({"fill":"#0AB1FE"})
+			$('#toolTip').remove();
+		}).click(function(){
+			if(this["zoom"] == true){
+				this.scale(0.5,0.5,0,0);
+				mostrar()
+				this["zoom"] = false;
+			}else{
+				ocultar();
+				this.show();
+				this.scale(2,2,0,0);
+				this["zoom"] = true;
+			}			
+		});
+
+
+		baleares = mapa.path(departamentosCCAA['baleares']).attr({
+			fill: '#0AB1FE',
+			stroke: "#56494D",
+		}).mousemove(function(e){
+			pintaTooltip("Baleares", e.pageX+10, e.pageY+20);
+		}).hover(function(){this.attr({"fill":"#000"});
+		}).mouseout(function(){
+			this.attr({"fill":"#0AB1FE"})
+			$('#toolTip').remove();
+		}).click(function(){
+			if(this["zoom"] == true){
+				this.scale(0.5,0.5,0,0);
+				mostrar()
+				this["zoom"] = false;
+			}else{
+				ocultar();
+				this.show();
+				this.scale(2,2,0,0);
+				this["zoom"] = true;
+			}			
+		});
+
+
+		aragon = mapa.path(departamentosCCAA['aragon']).attr({
+			fill: '#0AB1FE',
+			stroke: "#56494D",
+		}).mousemove(function(e){
+			pintaTooltip("Aragon", e.pageX+10, e.pageY+20);
+		}).hover(function(){this.attr({"fill":"#000"});
+		}).mouseout(function(){
+			this.attr({"fill":"#0AB1FE"})
+			$('#toolTip').remove();
+		}).click(function(){
+			if(this["zoom"] == true){
+				this.scale(0.5,0.5,0,0);
+				mostrar()
+				this["zoom"] = false;
+			}else{
+				ocultar();
+				this.show();
+				this.scale(2,2,0,0);
+				this["zoom"] = true;
+			}			
+		});
+
+
+	}
+	
+	ccaa = {}
+	
+	pintaCCAA();
+	
+function ocultar(){
+	cantabria.hide();
+	asturias.hide();
+	galicia.hide();
+	euskadi.hide();
+	navarra.hide();
+	rioja.hide();
+	cataluña.hide();
+	castillaLeon.hide();
+	castillaMancha.hide();
+	valencia.hide();
+	murcia.hide();
+	madrid.hide();
+	extremadura.hide();
+	andalucia.hide();
+	baleares.hide();
+	aragon.hide();
+}
+
+function mostrar(){
+	cantabria.show();
+	asturias.show();
+	galicia.show();
+	euskadi.show();
+	navarra.show();
+	rioja.show();
+	cataluña.show();
+	castillaLeon.show();
+	castillaMancha.show();
+	valencia.show();
+	murcia.show();
+	madrid.show();
+	extremadura.show();
+	andalucia.show();
+	baleares.show();
+	aragon.show();
+}
+
+
+});
+
+
+
+</script>
+</head>
+<body>
+	<div id="contenedor">
+		<h1>--------------- EJERCICIO 4 ---------------</h1>
+		<div id="mapaCCAA">
+		</div>
+		
+		
+	</div>
+</body>
+</html>
